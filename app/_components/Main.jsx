@@ -61,7 +61,7 @@ export default function Main() {
           alt="dashboard"
           width={1000}
           height={700}
-          className="my-5 md:ml-48 rounded-xl border-2 sm:ml-0"
+          className="my-5 lg:ml-36 rounded-xl border-2 shadow-md"
         />
       </div>
     </>
