@@ -43,7 +43,7 @@ export default function Main() {
                   width={500}
                   height={300}
                   alt="vector"
-                  className="object-contain lg:ml-56"
+                  className="object-contain lg:mr-0"
                 />
               </div>
               <Image
