@@ -1,7 +1,26 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",  // Set the base directory to your project root
     "paths": {
-      "@/*": ["./*"]
-    }
-  }
+      "@components/*": ["components/*"],  // Alias for the components folder at root
+      "@utils/*": ["app/utils/*"],        // Alias for the utils folder
+      "@pages/*": ["app/pages/*"]         // Alias for the pages folder
+    },
+    "allowJs": true,  // Allow JavaScript files
+    "jsx": "react-jsx",  // Ensure JSX transformation
+    "moduleResolution": "node"
+  },
+  "include": [
+    "next-env.d.ts",
+    ".next/types/**/*.ts",
+    "app/**/*.js",  // Include JavaScript files in the app directory
+    "app/**/*.jsx",  // Include JSX files
+    "components/**/*.js",  // Include components folder at root
+    "components/**/*.jsx",  // Include JSX components in components folder
+    "app/pages/**/*.js",  // Include pages
+    "app/pages/**/*.jsx"  // Include JSX pages 
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
