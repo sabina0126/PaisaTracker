@@ -15,7 +15,7 @@ export default function About() {
                 <div className="absolute z-10 flex items-center justify-center w-[50vw] max-w-[250px] h-[50vw] max-h-[250px] bg-teal-100 rounded-full">
                   {/* Image */}
                   <img
-                    src="/About.png"
+                    src="/About.PNG"
                     alt="Businessman Icon"
                     className="z-20 object-cover h-auto transition-transform duration-500 hover:scale-105"
                   />
