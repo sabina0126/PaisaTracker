@@ -5,6 +5,8 @@ import DashboardHeader from './_components/DashboardHeader';
 import { useUser } from "@clerk/nextjs";
 import { eq } from "drizzle-orm";
 import { useRouter } from "next/navigation";
+import { db } from "utils/dbConfig";
+import { Budgets } from "utils/schema";
 
 function DashboardLayout({ children }) {
   const { user } = useUser();
