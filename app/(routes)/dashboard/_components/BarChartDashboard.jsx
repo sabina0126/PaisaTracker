@@ -8,7 +8,7 @@ import {
   CartesianGrid,
   Legend,
   ResponsiveContainer,
-} from "recharts"; // Correct import from Recharts
+} from "recharts";
 
 function BarChartDashboard({ budgetList }) {
   return (
@@ -21,9 +21,9 @@ function BarChartDashboard({ budgetList }) {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis className="text-sm" dataKey="name" />
-          <YAxis className="text-sm"/>
-          <Tooltip  className="text-sm" />
-          <Legend  className="text-sm"/>
+          <YAxis className="text-sm" />
+          <Tooltip className="text-sm" />
+          <Legend className="text-sm" />
           <Bar dataKey="totalSpend" stackId="a" fill="#388687" />
           <Bar dataKey="amount" stackId="a" fill="#D7E6E7" />
         </BarChart>
