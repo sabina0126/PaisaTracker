@@ -22,9 +22,9 @@ export default function Header() {
 
   return (
     <header className="py-2 border-b">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex justify-between items-center px-4 lg:px-8">
         {/* Desktop Navigation */}
-        <nav className="font-serif text-black hidden md:flex space-x-4">
+        <nav className="font-serif text-black hidden md:flex space-x-6 lg:space-x-7">
           <button
             onClick={() => scrollToSection("home")}
             className="hover:underline"
@@ -61,7 +61,7 @@ export default function Header() {
               height={50}
               priority
             />
-            <h1 className="text-2xl text-teal-400 font-serif">
+            <h1 className="text-xl lg:text-2xl text-teal-400 font-serif ml-2">
               Paisa Tracker
             </h1>
           </div>
@@ -88,18 +88,18 @@ export default function Header() {
         </div>
 
         {/* Auth Section */}
-        <div className="relative flex items-center font-serif space-x-6">
+        <div className="relative flex items-center font-serif space-x-4 lg:space-x-6">
           {isSignedIn ? (
             <UserButton />
           ) : (
             <>
               <Link href="/sign-in">
-                <button className="border rounded-xl bg-teal-700 px-5 py-1 text-white">
+                <button className="border rounded-xl bg-teal-700 px-4 py-2 text-sm lg:text-base text-white">
                   Sign In
                 </button>
               </Link>
               <Link href="/sign-up">
-                <button className="border rounded-xl bg-teal-700 px-5 py-1 text-white">
+                <button className="border rounded-xl bg-teal-700 px-4 py-2 text-sm lg:text-base text-white">
                   Sign Up
                 </button>
               </Link>
@@ -111,16 +111,28 @@ export default function Header() {
       {/* Mobile Menu */}
       {isMenuOpen && (
         <nav className="md:hidden flex flex-col mt-4 space-y-2 text-center font-serif text-black">
-          <button onClick={() => scrollToSection("home")} className="hover:underline">
+          <button
+            onClick={() => scrollToSection("home")}
+            className="hover:underline"
+          >
             Home
           </button>
-          <button onClick={() => scrollToSection("features")} className="hover:underline">
+          <button
+            onClick={() => scrollToSection("features")}
+            className="hover:underline"
+          >
             Features
           </button>
-          <button onClick={() => scrollToSection("about")} className="hover:underline">
+          <button
+            onClick={() => scrollToSection("about")}
+            className="hover:underline"
+          >
             About Us
           </button>
-          <button onClick={() => scrollToSection("footer")} className="hover:underline">
+          <button
+            onClick={() => scrollToSection("footer")}
+            className="hover:underline"
+          >
             Contact
           </button>
         </nav>

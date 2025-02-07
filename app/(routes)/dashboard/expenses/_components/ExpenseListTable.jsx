@@ -2,13 +2,13 @@ import { eq } from "drizzle-orm";
 import { Trash } from "lucide-react";
 import React from "react";
 import { toast } from "sonner";
-import { db } from "utils/dbConfig"; // Ensure you import the db instance
+import { db } from "utils/dbConfig"; 
 import { Expenses } from "utils/schema";
 
 function ExpenseListTable({ expensesList, refreshData }) {
   const deleteExpense = async (expense) => {
     try {
-      const result = await db // Use the db instance here
+      const result = await db 
         .delete(Expenses)
         .where(eq(Expenses.id, expense.id))
         .returning();
