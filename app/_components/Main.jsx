@@ -45,7 +45,7 @@ export default function Main() {
                   width={700}
                   height={300}
                   alt="vector"
-                  className="lg:ml-56"
+                  className="object-contain"
                 />
               </div>
               <Image
@@ -58,17 +58,13 @@ export default function Main() {
             </div>
           </div>
         </section>
-
-        {/* Dashboard Image */}
-        <div className="px-4 lg:px-12">
-          <Image
-            src="/dashboard.png"
-            alt="dashboard"
-            width={1000}
-            height={700}
-            className="my-5 lg:ml-36 rounded-xl border-2 shadow-md"
-          />
-        </div>
+        <Image
+          src="/dashboard.png"
+          alt="dashboard"
+          width={1000}
+          height={700}
+          className="my-5 md:ml-48 rounded-xl border-2 sm:ml-0"
+        />
       </div>
     </>
   );
