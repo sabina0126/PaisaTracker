@@ -5,6 +5,8 @@ import React, { useEffect, useState } from "react";
 import { db } from "utils/dbConfig";
 import { Budgets, Expenses } from "utils/schema";
 import ExpenseListTable from "./_components/ExpenseListTable";
+import MonthSelector from "./_components/MonthSelector";
+import ExpenseChart from "./_components/ExpenseChart";
 
 function ExpensePage() {
   const { user, isLoading } = useUser();
@@ -18,6 +20,15 @@ function ExpensePage() {
       getAllExpenses();
     }
   }, [user]);
+
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+
+  // Filter expenses by selected month
+  const filteredExpenses = Array.isArray(expensesList)
+    ? expensesList.filter((expense) => {
+        return new Date(expense.createdAt).getMonth() + 1 === selectedMonth;
+      })
+    : [];
 
   // Fetch budget list
   const getBugdetList = async () => {
@@ -59,8 +70,19 @@ function ExpensePage() {
 
   return (
     <div className="p-4">
+
+      <h2 className="mb-3 font-bold text-2xl">My Expenses</h2>
+
+      <MonthSelector
+        selectedMonth={selectedMonth}
+        setSelectedMonth={setSelectedMonth}
+      />
+
+      {/* Expense Chart */}
+      <ExpenseChart expenses={filteredExpenses} />
+
       <ExpenseListTable
-        expensesList={expensesList}
+        expensesList={filteredExpenses}
         refreshData={() => {
           getBugdetList();
           getAllExpenses();

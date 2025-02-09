@@ -1,5 +1,6 @@
 "use client";
 import { UserButton, useUser } from "@clerk/nextjs";
+import { ArrowRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
@@ -90,7 +91,14 @@ export default function Header() {
         {/* Auth Section */}
         <div className="relative flex items-center font-serif space-x-4 lg:space-x-6">
           {isSignedIn ? (
-            <UserButton />
+            <>
+              <Link href="/dashboard">
+                <button className="border flex items-center gap-2 rounded-xl bg-teal-700 px-4 py-2 text-sm lg:text-base text-white">
+                  Dashboard <ArrowRightIcon/>
+                </button>
+              </Link>
+              <UserButton />
+            </>
           ) : (
             <>
               <Link href="/sign-in">

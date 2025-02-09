@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useUser } from "@clerk/nextjs";
 import { desc, eq, getTableColumns, sql } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
@@ -23,6 +23,8 @@ import {
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import EditBudget from "../_components/EditBudget";
+import MonthSelector from "../_components/MonthSelector";
+import ExpenseChart from "../_components/ExpenseChart";
 
 function ExpensesScreen({ params }) {
   const { user } = useUser();
@@ -107,6 +109,15 @@ function ExpensesScreen({ params }) {
     }
   };
 
+  const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth() + 1);
+
+  // Filter expenses by selected month
+  const filteredExpenses = Array.isArray(expensesList)
+    ? expensesList.filter((expense) => {
+        return new Date(expense.createdAt).getMonth() + 1 === selectedMonth;
+      })
+    : [];
+
   return (
     <div className="p-7">
       <h2 className="font-bold text-2xl flex justify-between items-center">
@@ -159,8 +170,17 @@ function ExpensesScreen({ params }) {
       </div>
 
       <div>
+        <h2 className="mb-3 font-bold text-2xl">My Expenses</h2>
+
+        <MonthSelector
+          selectedMonth={selectedMonth}
+          setSelectedMonth={setSelectedMonth}
+        />
+
+        {/* Expense Chart */}
+        <ExpenseChart expenses={filteredExpenses} />
         <ExpenseListTable
-          expensesList={expensesList}
+          expensesList={filteredExpenses}
           refreshData={getExpensesList}
         />
       </div>

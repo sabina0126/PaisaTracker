@@ -26,12 +26,6 @@ function SideNav() {
       icon: ReceiptText,
       path: "/dashboard/expenses",
     },
-    {
-      id: 4,
-      name: "Forecast",
-      icon: ChartBarIcon,
-      path: "/dashboard/forecast",
-    },
   ];
   const path = usePathname();
 

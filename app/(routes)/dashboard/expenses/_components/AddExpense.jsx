@@ -7,7 +7,6 @@ import { Expenses, Budgets } from "utils/schema";
 import { useUser } from "@clerk/nextjs";
 import { toast } from "sonner";
 import { eq, sum } from "drizzle-orm";
-import moment from "moment";
 
 function AddExpense({ budgetId, refreshData }) {
   const [name, setName] = useState("");
@@ -18,15 +17,19 @@ function AddExpense({ budgetId, refreshData }) {
   const addNewExpense = async () => {
     try {
       setLoading(true);
-      const expenseAmount = parseFloat(amount);
 
-      if (!name) {
-        toast.error("Please enter an expense name.");
-        setLoading(false);
+      // Convert amount to a number
+      const expenseAmount = parseFloat(amount);
+      if (!name.trim()) {
+        toast.error("Please enter a valid expense name.");
+        return;
+      }
+      if (isNaN(expenseAmount) || expenseAmount <= 0) {
+        toast.error("Please enter a valid expense amount.");
         return;
       }
 
-      // Fetch the associated budget details
+      // Fetch budget details
       const budgetData = await db
         .select({ amount: Budgets.amount })
         .from(Budgets)
@@ -35,7 +38,6 @@ function AddExpense({ budgetId, refreshData }) {
 
       if (!budgetData.length) {
         toast.error("Budget not found.");
-        setLoading(false);
         return;
       }
 
@@ -54,22 +56,22 @@ function AddExpense({ budgetId, refreshData }) {
         toast.error(
           `Budget exceeded! Total expenses: Rs.${totalExpenses}, Budget: Rs.${budgetAmount}`
         );
-        setLoading(false);
         return;
       }
 
       // Add the new expense
       await db.insert(Expenses).values({
         amount: expenseAmount,
-        name: name,
+        name: name.trim(),
         budgetId: budgetId,
-        createdAt: moment().format("YYYY/MM/DD"),
+        createdAt: new Date().toISOString().split("T")[0], // "YYYY-MM-DD"
       });
 
       toast.success("Expense added successfully!");
       refreshData();
     } catch (error) {
       toast.error("Failed to add expense. Please try again.");
+      console.error("Error adding expense:", error);
     } finally {
       setLoading(false);
       setAmount("");
@@ -104,7 +106,7 @@ function AddExpense({ budgetId, refreshData }) {
         />
       </div>
       <Button
-        disabled={loading || !(name && amount)}
+        disabled={loading || !(name.trim() && amount)}
         onClick={addNewExpense}
         className={`mt-3 w-full ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
       >

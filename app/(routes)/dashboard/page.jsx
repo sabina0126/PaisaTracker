@@ -71,7 +71,7 @@ export default function Dashboard() {
         <div className="lg:col-span-2">
           <BarChartDashboard budgetList={budgetList} />
           <ExpenseListTable
-            expensesList={expensesList}
+            expensesList={expensesList.slice(0,6)}
             refreshData={() => {
               getBugdetList();
               getAllExpenses();
